@@ -9,13 +9,12 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
-  const success = await login(data.name, data.password);
+    await login(data.name, data.password);
 
-  if (success) {
+    // 👇 Si el login fue exitoso, redirige
     navigate("/Dashboard");
     reset();
-  }
-});
+  });
 
   return (
     <form

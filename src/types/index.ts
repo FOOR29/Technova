@@ -23,3 +23,18 @@ export type ProtectedRouteProps = {
     isAuth?: boolean
     redirectTo?: any
 };
+
+export interface ProductFormProps {
+  editingProduct?: any;
+  onSuccess: () => void;
+}
+
+export interface ProductFormData {
+  sku: string;
+  name: string;
+  brand: string;
+  quantity: number;
+  price: number;
+  isActive: boolean;
+  category: string;
+}
