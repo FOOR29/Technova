@@ -1,153 +1,54 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { postProduct, updateProduct } from "../services/productService";
-import type { ProductFormData, ProductFormProps } from "../types";
+import { createProduct, updateProduct } from "../services/productService";
 
-const ProductForm = ({ editingProduct, onSuccess }: ProductFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ProductFormData>({
-    defaultValues: {
+const ProductForm = ({ editingProduct, onSuccess }: any) => {
+  const { register, handleSubmit, reset } = useForm();
+
+  useEffect(() => {
+    if (editingProduct) reset(editingProduct);
+    else reset({
       sku: "",
       name: "",
       brand: "",
       quantity: 0,
       price: 0,
-      isActive: true,
       category: "",
-    },
-  });
+      imageUrl: "",
+    });
+  }, [editingProduct]);
 
-  useEffect(() => {
-    if (editingProduct) reset(editingProduct);
-  }, [editingProduct, reset]);
-
-  const onSubmit = async (data: ProductFormData) => {
-    try {
-      if (editingProduct) {
-        await updateProduct(editingProduct.id, data);
-        alert("✅ Product updated successfully!");
-      } else {
-        await postProduct(data);
-        alert("✅ Product created successfully!");
-      }
-
-      onSuccess();
-      reset();
-    } catch (error: any) {
-      alert(error.response?.data?.message || "❌ Error saving product");
+  const onSubmit = handleSubmit(async (data) => {
+    if (editingProduct) {
+      await updateProduct(editingProduct.id, data);
+    } else {
+      await createProduct(data);
     }
-  };
+    onSuccess();
+    reset();
+  });
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg mx-auto border border-[#e5e7eb]"
+      onSubmit={onSubmit}
+      className="bg-white shadow-md rounded-xl p-6 max-w-lg mx-auto"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center text-[#043150]">
+      <h2 className="text-xl font-bold mb-4">
         {editingProduct ? "Edit Product" : "Create Product"}
       </h2>
 
-      <div className="grid gap-4">
-        {/* SKU */}
-        <div>
-          <label className="text-[#043150] font-medium">SKU</label>
-          <input
-            type="text"
-            {...register("sku", { required: "SKU is required" })}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-          {errors.sku && (
-            <p className="text-red-500 text-sm">{errors.sku.message}</p>
-          )}
-        </div>
-
-        {/* Name */}
-        <div>
-          <label className="text-[#043150] font-medium">Name</label>
-          <input
-            type="text"
-            {...register("name", { required: "Name is required" })}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
-          )}
-        </div>
-
-        {/* Brand */}
-        <div>
-          <label className="text-[#043150] font-medium">Brand</label>
-          <input
-            type="text"
-            {...register("brand")}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-        </div>
-
-        {/* Category */}
-        <div>
-          <label className="text-[#043150] font-medium">Category</label>
-          <input
-            type="text"
-            {...register("category")}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-        </div>
-
-        {/* Quantity */}
-        <div>
-          <label className="text-[#043150] font-medium">Quantity</label>
-          <input
-            type="number"
-            {...register("quantity", {
-              valueAsNumber: true,
-              min: { value: 0, message: "Quantity must be positive" },
-            })}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-          {errors.quantity && (
-            <p className="text-red-500 text-sm">{errors.quantity.message}</p>
-          )}
-        </div>
-
-        {/* Price */}
-        <div>
-          <label className="text-[#043150] font-medium">Price</label>
-          <input
-            type="number"
-            step="0.01"
-            {...register("price", {
-              valueAsNumber: true,
-              required: "Price is required",
-              min: {
-                value: 0.01,
-                message: "Price must be a positive number",
-              },
-            })}
-            className="border border-gray-300 rounded-md p-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-[#25A2D8]"
-          />
-          {errors.price && (
-            <p className="text-red-500 text-sm">{errors.price.message}</p>
-          )}
-        </div>
-
-        {/* Active */}
-        <label className="flex items-center gap-2 mt-2 text-[#043150]">
-          <input
-            type="checkbox"
-            {...register("isActive")}
-            className="accent-[#25A2D8]"
-          />
-          Active
-        </label>
+      <div className="grid gap-3">
+        <input {...register("sku")} placeholder="SKU" className="border p-2 rounded" />
+        <input {...register("name")} placeholder="Name" className="border p-2 rounded" />
+        <input {...register("brand")} placeholder="Brand" className="border p-2 rounded" />
+        <input type="number" {...register("quantity")} placeholder="Quantity" className="border p-2 rounded" />
+        <input type="number" step="0.01" {...register("price")} placeholder="Price" className="border p-2 rounded" />
+        <input {...register("category")} placeholder="Category" className="border p-2 rounded" />
+        <input {...register("imageUrl")} placeholder="Image URL" className="border p-2 rounded" />
 
         <button
           type="submit"
-          className="bg-[#25A2D8] text-white py-2 rounded-md mt-4 font-semibold hover:bg-[#1d8ac1] transition-all"
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
         >
           {editingProduct ? "Update" : "Create"}
         </button>
