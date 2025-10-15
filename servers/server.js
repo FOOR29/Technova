@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🟩 DB connection
+// DB connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -25,7 +25,7 @@ db.connect((err) => {
   console.log("✅ Connected to CleverCloud MySQL!");
 });
 
-// 🟩 LOGIN
+// LOGIN
 app.post("/login", (req, res) => {
   const { name, password } = req.body;
   const sql = "SELECT * FROM users WHERE name = ? AND password = ?";
@@ -38,7 +38,7 @@ app.post("/login", (req, res) => {
 });
 
 
-// 🟩 CRUD de productos
+// CRUD de productos
 // Obtener todos
 app.get("/products", (req, res) => {
   const sql = "SELECT * FROM products ORDER BY createdAt DESC";

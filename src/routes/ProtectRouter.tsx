@@ -1,4 +1,3 @@
-// src/routes/ProtectRouter.tsx
 import { Navigate, Outlet } from "react-router-dom";
 import type { ProtectedRouteProps } from "../types";
 

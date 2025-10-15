@@ -1,4 +1,3 @@
-// ✅ ProductForm Component (Redesigned - Minimalist & Professional Look)
 // No logic changed, only visuals + form validation improvements
 
 import { useEffect } from "react";

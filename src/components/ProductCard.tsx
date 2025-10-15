@@ -1,4 +1,3 @@
-// ✅ ProductCard Component (Redesigned - Minimalist & Professional Look)
 // Only visual changes, no logic modifications.
 
 interface ProductCardProps {
@@ -12,7 +11,7 @@ const ProductCard = ({ product, onEdit, onDelete }: ProductCardProps) => (
     className="bg-white rounded-2xl shadow-md p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center 
                hover:shadow-lg transition-all duration-300 border border-gray-100"
   >
-    {/* 🧾 Product Info Section */}
+    {/*  Product Info Section */}
     <div className="text-[#043150] mb-4 sm:mb-0">
       <h3 className="text-xl font-semibold mb-1">{product.name}</h3>
       <p className="text-gray-500 text-sm mb-1">{product.brand}</p>

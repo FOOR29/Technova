@@ -30,10 +30,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         permissions: ["read"],
         role: [data.role],
       });
-      return true; // ✅ Login exitoso
+      return true; // Login exitoso
     } else {
       alert(data.message || "Invalid credentials");
-      return false; // ❌ Login fallido
+      return false; //  Login fallido
     }
   } catch (error) {
     console.error("Login error:", error);
