@@ -20,28 +20,20 @@ const LoginForm = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#021C2C] to-[#043150] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#043150] px-4">
       {/* === Login Container === */}
       <form
         onSubmit={onSubmit}
-        className="bg-white text-[#043150] rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md transition-all duration-300"
+        className="bg-white rounded-xl shadow-2xl p-10 w-full max-w-md"
       >
-        {/* === Logo === */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-[#25A2D8] rounded-full px-6 py-3 shadow-md">
-            <span className="text-white text-2xl font-bold tracking-wider">
-              Technova
-            </span>
-          </div>
-        </div>
 
         {/* === Title === */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-          Sign In
+        <h2 className="text-lg font-medium text-[#403738] text-center mb-8">
+          Welcome back
         </h2>
 
         {/* === Username === */}
-        <div className="mb-5 flex items-center gap-2">
+        <div className="mb-6">
           <div className="w-full">
             <label
               htmlFor="name"
@@ -56,18 +48,18 @@ const LoginForm = () => {
                 maxLength: { value: 20, message: "Max 20 characters" },
               })}
               placeholder="Enter your username"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#25A2D8] focus:outline-none text-gray-800 placeholder-gray-400 transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-[#043150] placeholder-gray-400 focus:border-[#25A2D8] focus:ring-2 focus:ring-[#25A2D8] focus:ring-opacity-20 focus:outline-none transition-all"
             />
           </div>
           {errors.name && (
-            <p className="text-red-500 text-xs whitespace-nowrap">
+            <p className="text-red-500 text-xs mt-1">
               {errors.name.message}
             </p>
           )}
         </div>
 
         {/* === Password === */}
-        <div className="mb-6 flex items-center gap-2">
+        <div className="mb-8">
           <div className="w-full">
             <label
               htmlFor="password"
@@ -82,11 +74,11 @@ const LoginForm = () => {
                 minLength: { value: 2, message: "Minimum 2 characters" },
               })}
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#25A2D8] focus:outline-none text-gray-800 placeholder-gray-400 transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-[#043150] placeholder-gray-400 focus:border-[#25A2D8] focus:ring-2 focus:ring-[#25A2D8] focus:ring-opacity-20 focus:outline-none transition-all"
             />
           </div>
           {errors.password && (
-            <p className="text-red-500 text-xs whitespace-nowrap">
+            <p className="text-red-500 text-xs mt-1">
               {errors.password.message}
             </p>
           )}
@@ -95,7 +87,7 @@ const LoginForm = () => {
         {/* === Button === */}
         <button
           type="submit"
-          className="w-full bg-[#25A2D8] hover:bg-[#1e8ac2] text-white font-semibold py-2.5 rounded-lg shadow-md transition-all duration-300"
+          className="w-full bg-[#25A2D8] text-white font-medium py-3 rounded-lg hover:bg-[#1d8ac1] transition-all duration-200 shadow-md hover:shadow-lg"
         >
           Sign In
         </button>
@@ -104,17 +96,17 @@ const LoginForm = () => {
         <div className="text-center mt-6">
           <a
             href="#"
-            className="text-sm text-[#25A2D8] hover:underline block mb-3 transition"
+            className="text-sm text-[#25A2D8] hover:text-[#1d8ac1] block mb-3 transition-colors font-medium"
           >
-            Forgot your password?
+            Forgot password?
           </a>
           <p className="text-sm text-gray-500">
-            Don’t have an account?{" "}
+            New to Technova?{" "}
             <a
               href="#"
-              className="text-[#25A2D8] font-semibold hover:underline transition"
+              className="text-[#25A2D8] hover:text-[#1d8ac1] transition-colors font-medium"
             >
-              Create one
+              Create account
             </a>
           </p>
         </div>

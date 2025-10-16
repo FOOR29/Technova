@@ -3,7 +3,7 @@ import type { Users } from "../types";
 
 type AuthContextType = {
   user: Users | null;
-  login: (name: string, password: string) => Promise<boolean>; // 👈 cambia a boolean
+  login: (name: string, password: string) => Promise<boolean>;
   logout: () => void;
   isAuth: boolean;
 };
